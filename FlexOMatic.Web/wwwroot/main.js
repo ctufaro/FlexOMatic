@@ -187,13 +187,17 @@ form.addEventListener('submit', async (e) => {
             body: JSON.stringify({ cropIdea: idea, submitterName: savedName })
         });
 
-        const data = await res.json();
-
-        lastSubmittedCropId = data.cropId || data.CropID || data.id || null;
+        const text = await res.text();
+        let data;
+        try {
+            data = JSON.parse(text);
+        } catch {
+            data = { error: text };
+        }
 
         if (res.ok) {
             // Save returned ID if backend provides it (recommended)
-            lastSubmittedCropId = data.cropId ?? null;
+            lastSubmittedCropId = data.cropId || data.CropID || data.id || null;
 
             input.value = '';
 
