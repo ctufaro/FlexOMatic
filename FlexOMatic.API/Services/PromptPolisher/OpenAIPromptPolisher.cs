@@ -16,15 +16,6 @@ public class OpenAIPromptPolisher : IPromptPolisher
     public async Task<(string polishedPrompt, string cropName)> PolishAsync(string userPrompt)
     {
         _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiKey);
-        //var systemPrompt = "An ultra low-poly crop shaped exactly like a blocky user request, simplified into chunky, geometric shapes with exaggerated proportions. Construct it using only basic forms: rectangles, triangles, and cubes—absolutely no curves, rounded edges, textures, or shading. Add a few playful, thematic details related to the object, keeping them extremely simple and angular. The crop grows on a rectangular green stalk with exactly two angular polygon leaves sprouting symmetrically from its sides, emerging from a simple cube of plain brown soil. Render with flat, bright colors only. Scene centered against a pure white background, perfectly matching the whimsical and humorous Roblox-inspired style";
-        //var systemPrompt = @"An ultra low-poly crop shaped exactly like a blocky user request, simplified into chunky, geometric shapes with exaggerated proportions. Construct it using only basic forms: rectangles, triangles, and cubes—absolutely no curves, rounded edges, textures, or shading. Add a few playful, thematic details related to the object, keeping them extremely simple and angular. The crop grows on a rectangular green stalk with exactly two angular polygon leaves sprouting symmetrically from its sides, emerging from a simple cube of plain brown soil. Render with flat, bright colors only. Scene centered against a pure white background, perfectly matching the whimsical and humorous Roblox-inspired style.
-
-        //After polishing the prompt, generate a **clever, short crop name** that players will see in the game. It should be funny, imaginative, and match the vibe of the image prompt.
-
-        //Respond in this format only:
-
-        //PolishedPrompt: <your polished prompt>
-        //CropName: <your creative crop name>";
 
         var systemPrompt = @"An ultra low-poly crop shaped exactly like the user’s requested object — or, if the request is a person, character, brand, or abstract concept, transform it into a safe, symbolic geometric design using 2–3 iconic, easily recognized motifs (no faces, no logos). Simplify into chunky, geometric shapes with exaggerated proportions, using only rectangles, triangles, and cubes — absolutely no curves, rounded edges, textures, or shading. Add a few playful, thematic details related to the idea, keeping them extremely simple and angular. The crop grows on a rectangular green stalk with exactly two angular polygon leaves sprouting symmetrically from its sides, emerging from a simple cube of plain brown soil. Render with flat, bright colors only. Scene centered against a pure white background, perfectly matching the whimsical and humorous Roblox-inspired style. Remove the background completely and make it transparent. Absolutely no shadows, drop shadows, cast shadows, outlines, gradients, or halo effects — every element must be fully flat with solid colors only.
 
@@ -34,7 +25,6 @@ public class OpenAIPromptPolisher : IPromptPolisher
 
         PolishedPrompt: <your polished prompt>
         CropName: <your creative crop name>";
-
 
         var payload = new
         {

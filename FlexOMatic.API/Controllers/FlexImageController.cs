@@ -47,6 +47,9 @@ public class FlexImageController : ControllerBase
         var safePrompt = request.CropIdea;
         var (polishedPrompt, cropName) = await _promptPolisher.PolishAsync(safePrompt);
 
+        // Explicitly request a shadowless render to avoid faint drop shadows
+        polishedPrompt += " Rendered with flat colors and no shadows or drop shadows.";
+
         var payload = new
         {
             model = "gpt-image-1",
